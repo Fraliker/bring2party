@@ -8,7 +8,7 @@
 importScripts('./build/sw-toolbox.js');
 
 self.toolbox.options.cache = {
-  name: 'ionic-cache'
+  name: 'bring2party-cache'
 };
 
 // pre-cache our key assets
