@@ -4,7 +4,6 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
 import {PartiesPage} from '../pages/parties/parties';
-import {PartyPage} from '../pages/party/party';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -13,8 +12,7 @@ import {HttpModule} from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
-    PartiesPage,
-    PartyPage
+    PartiesPage
   ],
   imports: [
     HttpModule,
@@ -24,8 +22,7 @@ import {HttpModule} from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    PartiesPage,
-    PartyPage
+    PartiesPage
   ],
   providers: [
     StatusBar,

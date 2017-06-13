@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
-import Party = bring2party.data.Party;
+import {Party} from '../../model/data';
 
 @Injectable()
 export class PartyService {

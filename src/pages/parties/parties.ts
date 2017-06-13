@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {PartyPage} from '../party/party';
 import {PartyService} from './party.service';
 import {UserService} from '../../model/user.service';
-import Parties = bring2party.data.Parties;
-import Party = bring2party.data.Party;
+import {Party} from '../../model/data';
 
 /**
  * Generated class for the PartiesPage page.
@@ -12,7 +10,9 @@ import Party = bring2party.data.Party;
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+@IonicPage({
+  name: 'parties-page'
+})
 @Component({
   selector: 'page-parties',
   templateUrl: 'parties.html',
@@ -50,7 +50,7 @@ export class PartiesPage {
   }
 
   goToParty(party: Party) {
-    this.navCtrl.push(PartyPage);
+    this.navCtrl.push('party-page', {partyId: party.id});
   }
 
   isCurrentUserGoingToParty(party: Party) {
