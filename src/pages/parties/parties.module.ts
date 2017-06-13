@@ -1,7 +1,6 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {IonicPageModule, NavController} from 'ionic-angular';
+import {NgModule} from '@angular/core';
+import {IonicPageModule} from 'ionic-angular';
 import {PartiesPage} from './parties';
-import {PartyPage} from '../party/party';
 
 @NgModule({
   declarations: [
@@ -14,18 +13,5 @@ import {PartyPage} from '../party/party';
     PartiesPage
   ]
 })
-@Component({
-  templateUrl: 'parties.html'
-})
-export class PartiesPageModule implements OnInit {
-
-  constructor(public navCtrl: NavController) {
-  }
-
-  ngOnInit() {
-  }
-
-  public goToParty(partyId: string) {
-    this.navCtrl.push(PartyPage);
-  }
+export class PartiesPageModule {
 }

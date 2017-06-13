@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {PartyPage} from '../party/party';
 
 /**
  * Generated class for the PartiesPage page.
@@ -19,6 +20,10 @@ export class PartiesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PartiesPage');
+  }
+
+  goToParty(partyId: string) {
+    this.navCtrl.push(PartyPage);
   }
 
 }

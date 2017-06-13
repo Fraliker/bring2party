@@ -7,9 +7,8 @@
 <ion-content padding>
 
   <ion-fab top right edge>
-    <!-- TODO: takes you to creating new party -->
     <button ion-fab mini>
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add" (click)="goToParty()"></ion-icon>
     </button>
   </ion-fab>
 
@@ -35,7 +34,7 @@
       </ion-col>
       <ion-col>
         <!-- TODO: navigates to the bring list (same as clicking card) -->
-        <button ion-button icon-left clear small (click)="goToParty()">
+        <button ion-button icon-left clear small (click)="goToParty(123)">
           <ion-icon name="list"></ion-icon>
           <div>4 Brings</div>
         </button>
