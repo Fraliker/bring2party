@@ -27,14 +27,15 @@
     <ion-row>
       <ion-col>
         <!-- TODO: opens a dialog, asking if you're also going -->
-        <button ion-button icon-left clear small>
+        <button ion-button icon-left clear small [color]="userJoined ? 'primary' : 'inactive'"
+                (click)="showPartyPeople(123)">
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Going</div>
+          <div>{{usersGoing.length}} Going</div>
         </button>
       </ion-col>
       <ion-col>
         <!-- TODO: navigates to the bring list (same as clicking card) -->
-        <button ion-button icon-left clear small (click)="goToParty(123)">
+        <button ion-button icon-left clear small color="inactive" (click)="goToParty(123)">
           <ion-icon name="list"></ion-icon>
           <div>4 Brings</div>
         </button>

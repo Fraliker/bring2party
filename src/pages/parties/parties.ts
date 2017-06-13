@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {PartyPage} from '../party/party';
 
 /**
@@ -15,7 +15,15 @@ import {PartyPage} from '../party/party';
 })
 export class PartiesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userJoined: boolean;
+  usersGoing: string[];
+  currentUser: string;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    // TODO: load data from service
+    this.userJoined = false;
+    this.usersGoing = ['John', 'Brigitte', 'Urs', 'Susi'];
+    this.currentUser = 'Marco';
   }
 
   ionViewDidLoad() {
@@ -24,6 +32,37 @@ export class PartiesPage {
 
   goToParty(partyId: string) {
     this.navCtrl.push(PartyPage);
+  }
+
+  showPartyPeople(partyId: string) {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Party people');
+    if (!this.userJoined) {
+      alert.setMessage(this.currentUser + ', are you also going to the party?');
+      alert.addInput({
+        type: 'checkbox',
+        label: this.currentUser,
+        value: this.currentUser,
+        checked: false
+      });
+    }
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        this.usersGoing = data;
+        this.userJoined = data.indexOf(this.currentUser) > -1;
+      }
+    });
+    for (let user of this.usersGoing) {
+      alert.addInput({
+        type: 'checkbox',
+        label: user,
+        value: user,
+        checked: true,
+        disabled: user !== this.currentUser
+      });
+    }
+    alert.present();
   }
 
 }
