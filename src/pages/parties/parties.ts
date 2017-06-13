@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {PartyPage} from '../party/party';
+import {PartyService} from './party.service';
+import {UserService} from '../../model/user.service';
+import Parties = bring2party.data.Parties;
+import Party = bring2party.data.Party;
 
 /**
  * Generated class for the PartiesPage page.
@@ -12,54 +16,73 @@ import {PartyPage} from '../party/party';
 @Component({
   selector: 'page-parties',
   templateUrl: 'parties.html',
+  providers: [PartyService, UserService]
 })
 export class PartiesPage {
 
-  userJoined: boolean;
-  usersGoing: string[];
-  currentUser: string;
+  parties: Party[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-    // TODO: load data from service
-    this.userJoined = false;
-    this.usersGoing = ['John', 'Brigitte', 'Urs', 'Susi'];
-    this.currentUser = 'Marco';
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams, public alertCtrl: AlertController, private partyService: PartyService, private userService: UserService) {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Loading parties...'
+      //content: '<ion-spinner></ion-spinner>'
+    });
+    loading.present();
+
+    this.partyService.loadParties().subscribe(
+      result => {
+        console.log('done loading parties: ' + result);
+        this.parties = result;
+      },
+      err => {
+        console.error('error loading parties: ' + err);
+      },
+      () => {
+        console.log('loading parties completed');
+        loading.dismissAll();
+      }
+    );
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PartiesPage');
   }
 
-  goToParty(partyId: string) {
+  goToParty(party: Party) {
     this.navCtrl.push(PartyPage);
   }
 
-  showPartyPeople(partyId: string) {
+  isCurrentUserGoingToParty(party: Party) {
+    return this.partyService.isUserGoingToParty(party, this.userService.getCurrentUser());
+  }
+
+  showPartyPeople(party: Party) {
+    let currentUser = this.userService.getCurrentUser();
     let alert = this.alertCtrl.create();
     alert.setTitle('Party people');
-    if (!this.userJoined) {
-      alert.setMessage(this.currentUser + ', are you also going to the party?');
+    if (!this.isCurrentUserGoingToParty(party)) {
+      alert.setMessage(currentUser + ', are you also going to the party?');
       alert.addInput({
         type: 'checkbox',
-        label: this.currentUser,
-        value: this.currentUser,
+        label: currentUser,
+        value: currentUser,
         checked: false
       });
     }
     alert.addButton({
       text: 'Ok',
       handler: data => {
-        this.usersGoing = data;
-        this.userJoined = data.indexOf(this.currentUser) > -1;
+        party.guests = data;
       }
     });
-    for (let user of this.usersGoing) {
+    for (let guest of party.guests) {
       alert.addInput({
         type: 'checkbox',
-        label: user,
-        value: user,
+        label: guest,
+        value: guest,
         checked: true,
-        disabled: user !== this.currentUser
+        disabled: guest !== currentUser
       });
     }
     alert.present();

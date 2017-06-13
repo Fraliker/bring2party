@@ -12,7 +12,7 @@
     </button>
   </ion-fab>
 
-  <ion-card>
+  <ion-card *ngFor="let party of parties">
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/images/logo_sm.png">
@@ -26,16 +26,16 @@
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <!-- TODO: opens a dialog, asking if you're also going -->
-        <button ion-button icon-left clear small [color]="userJoined ? 'primary' : 'inactive'"
-                (click)="showPartyPeople(123)">
+        <button ion-button icon-left clear small
+                [color]="isCurrentUserGoingToParty(party) ? 'primary' : 'inactive'"
+                (click)="showPartyPeople(party)">
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{usersGoing.length}} Going</div>
+          <div>{{party.guests.length}} Going</div>
         </button>
       </ion-col>
       <ion-col>
         <!-- TODO: navigates to the bring list (same as clicking card) -->
-        <button ion-button icon-left clear small color="inactive" (click)="goToParty(123)">
+        <button ion-button icon-left clear small color="inactive" (click)="goToParty(party)">
           <ion-icon name="list"></ion-icon>
           <div>4 Brings</div>
         </button>

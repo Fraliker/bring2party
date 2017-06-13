@@ -8,6 +8,7 @@ import {PartyPage} from '../pages/party/party';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     PartyPage
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],

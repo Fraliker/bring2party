@@ -1,0 +1,64 @@
+{
+  "parties": [
+    {
+      "id": "abc",
+      "name": "Yvonne's 60. Geburiparty",
+      "location": {
+        "address": "Zirkusstrasse 87a",
+        "zip": "3000",
+        "city": "Bern"
+      },
+      "date": "2017-06-24T15:30:00.000Z",
+      "organizer": "Yvonne",
+      "items": [
+        {
+          "name": "Rüeblisalat",
+          "count": 2,
+          "claims": [
+            {
+              "user": "John",
+              "count": 1
+            },
+            {
+              "user": "Sarah",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "name": "Tomaten/Mozarellasalat",
+          "count": 1,
+          "claims": []
+        },
+        {
+          "name": "Tiramisu",
+          "count": 1,
+          "claims": []
+        },
+        {
+          "name": "Crème",
+          "count": 1,
+          "claims": [
+            {
+              "user": "Fabienne",
+              "count": 1
+            },
+            {
+              "user": "Susi",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "guests": [
+        "Sarah",
+        "John",
+        "Susi",
+        "Sven",
+        "Miriam",
+        "Seppi",
+        "Yvonne"
+      ]
+    }
+  ]
+}

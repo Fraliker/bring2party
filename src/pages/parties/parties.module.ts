@@ -4,10 +4,10 @@ import {PartiesPage} from './parties';
 
 @NgModule({
   declarations: [
-    PartiesPage,
+    PartiesPage
   ],
   imports: [
-    IonicPageModule.forChild(PartiesPage),
+    IonicPageModule.forChild(PartiesPage)
   ],
   exports: [
     PartiesPage
