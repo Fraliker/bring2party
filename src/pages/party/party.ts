@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavParams} from 'ionic-angular';
 import {PartyService} from '../parties/party.service';
 import {Party} from '../../model/data';
 
@@ -26,17 +26,9 @@ export class PartyPage {
   section: string = 'details';
   party: Party;
 
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams, public partyService: PartyService) {
-    let loading = this.loadingCtrl.create({
-      content: 'Loading parties...'
-    });
-    loading.present();
-
-    this.partyService.loadParties().subscribe(
-      res => this.party = res.find(party => party.id === this.navParams.get('partyId')),
-      err => console.error('error loading parties: ' + err),
-      () => loading.dismissAll()
-    );
+  constructor(public navParams: NavParams, public partyService: PartyService) {
+    this.partyService.getParties().subscribe(
+      res => this.party = res.find(party => party.id === this.navParams.get('partyId')));
   }
 
   ionViewDidLoad() {
