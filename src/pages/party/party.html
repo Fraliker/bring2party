@@ -5,13 +5,9 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-segment>
-      <ion-segment-button value="details">
-        Details
-      </ion-segment-button>
-      <ion-segment-button value="brings">
-        To Bring
-      </ion-segment-button>
+    <ion-segment [(ngModel)]="section">
+      <ion-segment-button value="details">Details</ion-segment-button>
+      <ion-segment-button value="brings">To Bring</ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
@@ -19,5 +15,13 @@
 
 
 <ion-content padding>
+  <div [ngSwitch]="section" *ngIf="party">
+    <ion-list *ngSwitchCase="'details'">
+      Party details for party {{party.id}}...
+    </ion-list>
+    <ion-list *ngSwitchCase="'brings'">
+      Show a list of items to bring...
+    </ion-list>
+  </div>
 
 </ion-content>

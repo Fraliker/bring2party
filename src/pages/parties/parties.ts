@@ -16,32 +16,25 @@ import {Party} from '../../model/data';
 @Component({
   selector: 'page-parties',
   templateUrl: 'parties.html',
-  providers: [PartyService, UserService]
+  providers: [
+    PartyService,
+    UserService
+  ]
 })
 export class PartiesPage {
 
   parties: Party[];
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams, public alertCtrl: AlertController, private partyService: PartyService, private userService: UserService) {
-
     let loading = this.loadingCtrl.create({
       content: 'Loading parties...'
-      //content: '<ion-spinner></ion-spinner>'
     });
     loading.present();
 
     this.partyService.loadParties().subscribe(
-      result => {
-        console.log('done loading parties: ' + result);
-        this.parties = result;
-      },
-      err => {
-        console.error('error loading parties: ' + err);
-      },
-      () => {
-        console.log('loading parties completed');
-        loading.dismissAll();
-      }
+      res => this.parties = res,
+      err => console.error('error loading parties: ' + err),
+      () => loading.dismissAll()
     );
   }
 
