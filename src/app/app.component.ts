@@ -7,7 +7,7 @@ import {PartiesPage} from '../pages/parties/parties';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class PartiesApp {
   rootPage: any = PartiesPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

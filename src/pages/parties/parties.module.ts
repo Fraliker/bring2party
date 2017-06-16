@@ -11,6 +11,9 @@ import {PartiesPage} from './parties';
   ],
   exports: [
     PartiesPage
+  ],
+  entryComponents: [
+    PartiesPage
   ]
 })
 export class PartiesPageModule {

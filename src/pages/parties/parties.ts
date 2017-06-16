@@ -15,17 +15,13 @@ import {Party} from '../../model/data';
 })
 @Component({
   selector: 'page-parties',
-  templateUrl: 'parties.html',
-  providers: [
-    PartyService,
-    UserService
-  ]
+  templateUrl: 'parties.html'
 })
 export class PartiesPage {
 
   parties: Party[];
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private partyService: PartyService, private userService: UserService) {
+  constructor(private navCtrl: NavController, private alertCtrl: AlertController, private partyService: PartyService, private userService: UserService) {
     this.partyService.getParties().subscribe(res => this.parties = res);
   }
 
@@ -34,7 +30,11 @@ export class PartiesPage {
   }
 
   goToParty(party: Party) {
-    this.navCtrl.push('party-page', {partyId: party.id});
+    if (!party) {
+      this.navCtrl.push('party-page');
+    } else {
+      this.navCtrl.push('party-page', {partyId: party.id});
+    }
   }
 
   isCurrentUserGoingToParty(party: Party) {

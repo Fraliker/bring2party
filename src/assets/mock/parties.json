@@ -2,14 +2,11 @@
   "parties": [
     {
       "id": "abc",
-      "name": "Yvonne's 60. Geburiparty",
-      "location": {
-        "address": "Zirkusstrasse 87a",
-        "zip": "3000",
-        "city": "Bern"
-      },
+      "title": "Yvonne's 60. Geburiparty",
+      "location": "Zirkusstrasse 87a, 3000 Bern",
       "date": "2017-06-24T15:30:00.000Z",
       "organizer": "Yvonne",
+      "description": "Die Party steigt unter dem Motto 'Bring Shit'. Bitte tragt euch in der Liste ein was ihr mitbringen möchtet. Ich freue mich auf euch. Yvonne",
       "items": [
         {
           "name": "Rüeblisalat",

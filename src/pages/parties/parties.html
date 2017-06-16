@@ -7,8 +7,8 @@
 <ion-content padding>
 
   <ion-fab top right edge>
-    <button ion-fab mini>
-      <ion-icon name="add" (click)="goToParty()"></ion-icon>
+    <button ion-fab mini (click)="goToParty()">
+      <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
 
@@ -17,13 +17,10 @@
       <ion-avatar item-start>
         <img src="assets/images/logo_sm.png">
       </ion-avatar>
-      <h2>Yvonne's 60. Geburiparty</h2>
-      <p>June 25, 2017 2.30p</p>
+      <h2>{{party.title}}</h2>
+      <p>{{party.date | date:'dd.MM.y HH:mm'}}</p>
     </ion-item>
-    <ion-card-content>
-      Die Party startet um halb 3. Bitte tragt euch in der Liste ein was ihr mitbringen möchtet. Ich freue mich auf
-      euch. Yvonne
-    </ion-card-content>
+    <ion-card-content>{{party.description}}</ion-card-content>
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small
@@ -34,7 +31,6 @@
         </button>
       </ion-col>
       <ion-col>
-        <!-- TODO: navigates to the bring list (same as clicking card) -->
         <button ion-button icon-left clear small color="inactive" (click)="goToParty(party)">
           <ion-icon name="list"></ion-icon>
           <div>4 Brings</div>

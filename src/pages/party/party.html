@@ -13,15 +13,42 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <div [ngSwitch]="section" *ngIf="party">
+
     <ion-list *ngSwitchCase="'details'">
-      Party details for party {{party.id}}...
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" name="title" [(ngModel)]="party.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea name="description" [(ngModel)]="party.description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Location</ion-label>
+        <ion-input type="text" [ngModel]="party.location" name="location" (input)="showAddressSuggestions($event.target.value)"></ion-input>
+        <button ion-button icon-only item-end clear class="push-bottom" *ngIf="addressSuggestions.length" tappable (click)="pickAddress(party.location)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item-group *ngIf="addressSuggestions.length" inset>
+        <ion-item *ngFor="let address of addressSuggestions" tappable (click)="pickAddress(address)">
+          <ion-icon name="pin" color="light" item-start></ion-icon>
+          {{ address }}
+        </ion-item>
+      </ion-item-group>
+      <ion-item>
+        <ion-label floating>Date</ion-label>
+        <ion-datetime displayFormat="DD.MM.YYYY HH:mm" [(ngModel)]="party.date"></ion-datetime>
+      </ion-item>
+      <button class="margin-top" ion-button full block tabbable (click)="saveParty()">Save</button>
     </ion-list>
+
     <ion-list *ngSwitchCase="'brings'">
       Show a list of items to bring...
     </ion-list>
+
   </div>
 
 </ion-content>

@@ -34,7 +34,7 @@ export class PartyService {
     }
   }
 
-  getParties() {
+  getParties(): Observable<Party[]> {
     if (this.parties) {
       // request already done -> return data as observable
       return Observable.of(this.parties);
@@ -55,5 +55,34 @@ export class PartyService {
 
   isUserGoingToParty(party: Party, user: string): boolean {
     return party.guests.indexOf(user) > -1
+  }
+
+  getParty(partyId: string): Observable<Party> {
+    if (this.parties) {
+      // request already done -> return data as observable
+      return Observable.of(this.findParty(partyId));
+    } else {
+      let loading = this.loadingCtrl.create({
+        content: 'Loading parties...'
+      });
+      loading.present();
+
+      this.loadParties().subscribe(
+        res => this.parties = res,
+        err => console.error('error loading parties: ' + err),
+        () => loading.dismissAll()
+      );
+      return this.partiesObservable.map(party => this.findParty(partyId));
+    }
+  }
+
+  private findParty(partyId: string): Party {
+    return this.parties.find(party => party.id === partyId);
+  }
+
+  saveParty(party: Party) {
+    if (!this.findParty(party.id)) {
+      this.parties.push(party);
+    }
   }
 }
