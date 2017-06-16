@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavParams} from 'ionic-angular';
 import {PartyService} from '../parties/party.service';
-import {Party} from '../../model/data';
+import {Item, Party} from '../../model/data';
 import {UserService} from '../../model/user.service';
 
 declare let google: any;
@@ -17,7 +17,7 @@ declare let google: any;
 })
 export class PartyPage {
 
-  section: string = 'details';
+  section: string = this.isOrganizer() ? 'details' : 'brings';
   party: Party;
 
   addressSuggestions: string[] = [];
@@ -66,5 +66,15 @@ export class PartyPage {
 
   saveParty() {
     this.partyService.saveParty(this.party);
+  }
+
+  isOrganizer(): boolean {
+    return this.party && this.party.organizer === this.userService.getCurrentUser();
+  }
+
+  getRequiredCount(item : Item): number {
+    let bringCount: number = 0;
+    item.claims.forEach(claim => bringCount += claim.count);
+    return item.count - bringCount;
   }
 }

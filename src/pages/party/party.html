@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div [ngSwitch]="section" *ngIf="party">
+  <fieldset [ngSwitch]="section" *ngIf="party" [disabled]="!isOrganizer()">
 
     <ion-list *ngSwitchCase="'details'">
       <ion-item>
@@ -40,15 +40,23 @@
       </ion-item-group>
       <ion-item>
         <ion-label floating>Date</ion-label>
-        <ion-datetime displayFormat="DD.MM.YYYY HH:mm" [(ngModel)]="party.date"></ion-datetime>
+        <ion-datetime *ngIf="isOrganizer()" displayFormat="DD.MM.YYYY HH:mm" [(ngModel)]="party.date"></ion-datetime>
+        <ion-input *ngIf="!isOrganizer()" type="text" name="date" [ngModel]="party.date | date:'dd.MM.y HH:mm'"></ion-input>
       </ion-item>
-      <button class="margin-top" ion-button full block tabbable (click)="saveParty()">Save</button>
+      <button *ngIf="isOrganizer()" class="margin-top" ion-button full block tabbable (click)="saveParty()">Save
+      </button>
     </ion-list>
 
     <ion-list *ngSwitchCase="'brings'">
-      Show a list of items to bring...
+      <ion-item *ngFor="let item of party.items">
+        <div>{{item.name}}</div>
+        <ion-badge item-end [color]="getRequiredCount(item) > 0 ? 'default' : 'light'">
+          {{getRequiredCount(item)}}
+        </ion-badge>
+        <button ion-button outline *ngFor="let claim of item.claims">{{claim.user}} ({{claim.count}})</button>
+      </ion-item>
     </ion-list>
 
-  </div>
+  </fieldset>
 
 </ion-content>
