@@ -32,7 +32,8 @@ export class PartyPage {
     } else {
       this.party = {
         id: undefined,
-        name: undefined,
+        title: undefined,
+        description: undefined,
         location: undefined,
         date: new Date(),
         organizer: this.userService.getCurrentUser(),

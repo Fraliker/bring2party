@@ -1,9 +1,3 @@
-export interface Location {
-  address: string;
-  zip: string;
-  city: string;
-}
-
 export interface Claim {
   user: string;
   count: number;
@@ -17,10 +11,11 @@ export interface Item {
 
 export interface Party {
   id: string;
-  name: string;
-  location: Location;
+  title: string;
+  location: string;
   date: Date;
   organizer: string;
+  description: string;
   items: Item[];
   guests: string[];
 }

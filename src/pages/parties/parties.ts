@@ -72,4 +72,9 @@ export class PartiesPage {
     alert.present();
   }
 
+  getMailToLink(party: Party): string {
+    let link = `mailto:?to=&subject=${party.title}&body=${party.description}\n\nhttp://localhost:8100/#/parties/${party.id}`;
+    return encodeURI(link);
+  }
+
 }
